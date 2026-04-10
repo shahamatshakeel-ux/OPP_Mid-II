@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OOP Mastery — Complete Revision Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #05070f;
+    --bg2: #0b0f1e;
+    --bg3: #111827;
+    --card: #0e1320;
+    --border: #1e2a40;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --pink: #ec4899;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --heading-font: 'DM Serif Display', serif;
+    --body-font: 'Sora', sans-serif;
+    --code-font: 'JetBrains Mono', monospace;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body-font);
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── SIDEBAR ─────────────────────────────────────────── */
+  #sidebar {
+    width: 270px;
+    min-width: 270px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-logo {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo h1 {
+    font-family: var(--heading-font);
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .sidebar-logo p {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sidebar-search {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-search input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: var(--body-font);
+    font-size: 0.8rem;
+    outline: none;
+    transition: border .2s;
+  }
+  .sidebar-search input:focus { border-color: var(--accent); }
+
+  .nav-group { padding: 8px 0; }
+  .nav-group-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 20px 4px;
+    font-weight: 600;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 0.83rem;
+    color: #94a3b8;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all .18s;
+    text-decoration: none;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--text);
+    background: rgba(0,229,255,0.05);
+    border-left-color: var(--accent);
+  }
+  .nav-item .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+  .nav-badge {
+    margin-left: auto;
+    background: rgba(0,229,255,0.1);
+    color: var(--accent);
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+
+  /* ─── SIDEBAR AUTHOR CARD ─────────────────────────────── */
+  .sidebar-author {
+    margin-top: auto;
+    padding: 18px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .author-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    transition: border-color .2s;
+  }
+  .author-card:hover { border-color: rgba(0,229,255,0.3); }
+  .author-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: cover;
+  }
+  .author-name {
+    font-family: var(--heading-font);
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .author-handle {
+    font-family: var(--code-font);
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .author-links {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .author-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+    font-family: var(--code-font);
+  }
+  .author-link.gh { background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid var(--border); }
+  .author-link.li { background: rgba(10,102,194,0.15); color: #60a5fa; border: 1px solid rgba(10,102,194,0.3); }
+  .author-link:hover { transform: translateY(-1px); filter: brightness(1.2); }
+
+  /* ─── MAIN ─────────────────────────────────────────────── */
+  #main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 0 80px;
+  }
+
+  /* ─── HERO ──────────────────────────────────────────────── */
+  #hero {
+    position: relative;
+    padding: 80px 60px 60px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+    bottom: -100px; left: 200px;
+    pointer-events: none;
+  }
+  #hero h1 {
+    font-family: var(--heading-font);
+    font-size: 3.4rem;
+    line-height: 1.1;
+    color: #fff;
+    position: relative;
+    max-width: 700px;
+  }
+  #hero h1 span { color: var(--accent); }
+  #hero p {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-top: 16px;
+    max-width: 560px;
+    position: relative;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .chip {
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .chip.cyan { border-color: var(--accent); color: var(--accent); }
+  .chip.purple { border-color: var(--accent2); color: #a78bfa; }
+  .chip.amber { border-color: var(--accent3); color: var(--accent3); }
+  .chip.green { border-color: var(--green); color: var(--green); }
+  .chip.pink { border-color: var(--pink); color: var(--pink); }
+  .chip:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+
+  /* ─── SECTION ───────────────────────────────────────────── */
+  .section {
+    padding: 56px 60px 0;
+    animation: fadeUp .5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .icon-cyan { background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2); }
+  .icon-purple { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); }
+  .icon-amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); }
+  .icon-green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+  .icon-pink { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.2); }
+  .icon-red { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); }
+
+  .section-title-block h2 {
+    font-family: var(--heading-font);
+    font-size: 2rem;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .section-title-block p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 6px;
+  }
+
+  /* ─── CARDS ─────────────────────────────────────────────── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .card:hover {
+    border-color: rgba(0,229,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card h3 {
+    font-family: var(--heading-font);
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h3 .tag {
+    font-family: var(--code-font);
+    font-size: 0.65rem;
+    background: rgba(0,229,255,0.1);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .card p { font-size: 0.85rem; color: #94a3b8; line-height: 1.65; }
+
+  /* ─── CODE BLOCK ─────────────────────────────────────────── */
+  .code-wrap {
+    background: #060a14;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    background: #0a0e1a;
+    border-bottom: 1px solid var(--border);
+  }
+  .code-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ef4444; }
+  .dot.y { background: #f59e0b; }
+  .dot.g { background: #10b981; }
+  .code-label {
+    font-family: var(--code-font);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .copy-btn {
+    font-family: var(--code-font);
+    font-size: 0.68rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+  pre {
+    padding: 20px 24px;
+    overflow-x: auto;
+    font-family: var(--code-font);
+    font-size: 0.8rem;
+    line-height: 1.75;
+    color: #cdd6f4;
+  }
+  pre::-webkit-scrollbar { height: 4px; }
+  pre::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* syntax colors */
+  .kw { color: #cba6f7; } /* keywords */
+  .tp { color: #89b4fa; } /* types */
+  .fn { color: #89dceb; } /* functions */
+  .str { color: #a6e3a1; } /* strings */
+  .cm { color: #585b70; font-style: italic; } /* comments */
+  .nm { color: #fab387; } /* numbers */
+  .op { color: #89dceb; } /* operators */
+  .cls { color: #f38ba8; } /* class names */
+
+  /* ─── CONCEPT GRID ───────────────────────────────────────── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .concept-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .concept-item h4 {
+    font-family: var(--heading-font);
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .concept-item p { font-size: 0.82rem; color: #94a3b8; }
+
+  /* ─── CALLOUT ────────────────────────────────────────────── */
+  .callout {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 0.85rem;
+  }
+  .callout-info { background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15); }
+  .callout-warn { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); }
+  .callout-tip { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); }
+  .callout-icon { font-size: 1.1rem; line-height: 1.5; flex-shrink: 0; }
+  .callout-content strong { display: block; margin-bottom: 4px; color: #fff; }
+
+  /* ─── TABLE ──────────────────────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; border-radius: 12px; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  thead tr { background: rgba(0,229,255,0.08); }
+  th { padding: 12px 16px; text-align: left; color: var(--accent); font-weight: 600; font-family: var(--code-font); font-size: 0.75rem; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+  td { padding: 11px 16px; border-bottom: 1px solid rgba(30,42,64,0.8); color: #94a3b8; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); color: var(--text); }
+
+  /* ─── DIVIDER ────────────────────────────────────────────── */
+  .divider { height: 1px; background: var(--border); margin: 40px 0 0; }
+
+  /* ─── INHERITANCE TREE ───────────────────────────────────── */
+  .tree-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 20px 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .tree-node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: var(--code-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 100px;
+  }
+  .node-base { background: rgba(0,229,255,0.12); border: 1.5px solid var(--accent); color: var(--accent); }
+  .node-mid { background: rgba(124,58,237,0.12); border: 1.5px solid #7c3aed; color: #a78bfa; }
+  .node-child { background: rgba(16,185,129,0.12); border: 1.5px solid var(--green); color: var(--green); }
+  .node-diamond { background: rgba(239,68,68,0.12); border: 1.5px dashed var(--red); color: var(--red); }
+  .tree-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tree-line { width: 2px; height: 28px; background: var(--border); }
+  .tree-h-line { display: flex; align-items: center; gap: 0; }
+
+  /* ─── PROGRESS / PILLS ───────────────────────────────────── */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .pill {
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-family: var(--code-font);
+    font-weight: 500;
+  }
+  .pill-cyan { background: rgba(0,229,255,0.1); color: var(--accent); }
+  .pill-purple { background: rgba(124,58,237,0.1); color: #a78bfa; }
+  .pill-green { background: rgba(16,185,129,0.1); color: var(--green); }
+  .pill-amber { background: rgba(245,158,11,0.1); color: var(--accent3); }
+  .pill-red { background: rgba(239,68,68,0.1); color: var(--red); }
+  .pill-pink { background: rgba(236,72,153,0.1); color: var(--pink); }
+
+  /* ─── SUB TITLE ──────────────────────────────────────────── */
+  .sub-title {
+    font-family: var(--heading-font);
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 32px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sub-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* ─── POLY TABLE ─────────────────────────────────────────── */
+  .poly-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  @media (max-width: 900px) { .poly-grid { grid-template-columns: 1fr; } }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    .section, #hero { padding-left: 20px; padding-right: 20px; }
+    #hero h1 { font-size: 2rem; }
+  }
+
+  /* ─── SCROLLBAR ──────────────────────────────────────────── */
+  #main::-webkit-scrollbar { width: 6px; }
+  #main::-webkit-scrollbar-track { background: var(--bg); }
+  #main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* ─── READING PROGRESS BAR ──────────────────────────────── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%; transition: width .1s linear;
+  }
+
+  /* ─── EXAM BADGE CARDS ───────────────────────────────────── */
+  .exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin: 20px 0;
+  }
+  .exam-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .exam-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .exam-card.red::before   { background: var(--red); }
+  .exam-card.green::before { background: var(--green); }
+  .exam-card.cyan::before  { background: var(--accent); }
+  .exam-card.amber::before { background: var(--accent3); }
+  .exam-card.purple::before{ background: var(--accent2); }
+  .exam-q {
+    font-size: 0.78rem; color: var(--muted);
+    font-family: var(--code-font); margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .exam-q-text { font-size: 0.88rem; color: #cbd5e1; margin-bottom: 10px; font-style: italic; }
+  .exam-a { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+
+  /* ─── STEP LIST ──────────────────────────────────────────── */
+  .step-list { list-style: none; padding: 0; margin: 16px 0; display: flex; flex-direction: column; gap: 12px; }
+  .step-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; font-size: 0.85rem; color: #94a3b8;
+  }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--code-font); font-size: 0.72rem; font-weight: 700;
+    background: rgba(0,229,255,0.12); color: var(--accent); border: 1px solid rgba(0,229,255,0.3);
+  }
+  .step-num.red   { background: rgba(239,68,68,0.12); color: var(--red); border-color: rgba(239,68,68,0.3); }
+  .step-num.green { background: rgba(16,185,129,0.12); color: var(--green); border-color: rgba(16,185,129,0.3); }
+  .step-num.amber { background: rgba(245,158,11,0.12); color: var(--accent3); border-color: rgba(245,158,11,0.3); }
+
+  /* ─── MEMORY DIAGRAM ─────────────────────────────────────── */
+  .mem-diagram {
+    background: #060a14; border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px; margin: 20px 0;
+    font-family: var(--code-font);
+  }
+  .mem-diagram-title {
+    font-size: 0.68rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: .12em; margin-bottom: 18px;
+  }
+  .mem-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .mem-box {
+    border-radius: 7px; padding: 7px 14px;
+    font-size: 0.75rem; font-weight: 600; text-align: center; min-width: 100px;
+  }
+  .mem-box.cyan  { background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); color: var(--accent); }
+  .mem-box.red   { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red); }
+  .mem-box.green { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); }
+  .mem-box.purple{ background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.3); color: #a78bfa; }
+  .mem-box.amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: var(--accent3); }
+  .mem-arrow { color: var(--muted); font-size: 1rem; }
+  .mem-label { font-size: 0.72rem; color: var(--muted); }
+
+  /* ─── COMPARE TABLE (2 col) ──────────────────────────────── */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;
+  }
+  @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; overflow: hidden;
+  }
+  .compare-col-header {
+    font-family: var(--heading-font); font-size: 1rem;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ─── QUICK SUMMARY BOX ─────────────────────────────────── */
+  .quick-summary {
+    background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(124,58,237,0.04));
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px 28px; margin: 24px 0;
+  }
+  .quick-summary h4 {
+    font-family: var(--heading-font); font-size: 1.1rem;
+    color: var(--accent); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .quick-summary ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .quick-summary li {
+    font-size: 0.84rem; color: #94a3b8;
+    padding-left: 16px; position: relative;
+  }
+  .quick-summary li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+  /* ─── DIAMOND SVG DIAGRAM ───────────────────────────────── */
+  .diamond-visual-wrap {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; margin: 24px 0;
+    overflow-x: auto;
+  }
+  .diamond-visual-wrap .dvw-title {
+    font-size: 0.68rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: .12em; margin-bottom: 24px; font-family: var(--code-font);
+    text-align: center;
+  }
+
+  /* ─── MOBILE MENU ────────────────────────────────────────── */
+  #mob-btn {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,229,255,0.4);
+  }
+  @media (max-width: 768px) { #mob-btn { display: flex; align-items: center; justify-content: center; } }
+</style>
+</head>
+<body>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<div id="progress-bar"></div>
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <h1>OOP Mastery</h1>
+    <p>Complete Revision Guide · C++</p>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="searchInput" placeholder="🔍  Search topics…" oninput="filterNav(this.value)"/>
+  </div>
+  <div class="nav-group" id="navList" style="flex:1;">
+    <div class="nav-group-title">Foundations</div>
+    <a class="nav-item" href="#class-object"><span class="nav-icon">🧱</span> Class &amp; Object</a>
+    <a class="nav-item" href="#constructor"><span class="nav-icon">⚙️</span> Constructor &amp; Types <span class="nav-badge">4 types</span></a>
+    <a class="nav-item" href="#copy-types"><span class="nav-icon">📋</span> Shallow vs Deep Copy <span class="nav-badge">key!</span></a>
+    <a class="nav-item" href="#destructor"><span class="nav-icon">🗑️</span> Destructor</a>
+    <div class="nav-group-title">Pillars</div>
+    <a class="nav-item" href="#encapsulation"><span class="nav-icon">🔒</span> Encapsulation</a>
+    <a class="nav-item" href="#association"><span class="nav-icon">🔗</span> Association &amp; Types <span class="nav-badge">3 types</span></a>
+    <a class="nav-item" href="#inheritance"><span class="nav-icon">🌳</span> Inheritance <span class="nav-badge">5 types</span></a>
+    <a class="nav-item" href="#polymorphism"><span class="nav-icon">🎭</span> Polymorphism <span class="nav-badge">CT + RT</span></a>
+    <div class="nav-group-title">Advanced</div>
+    <a class="nav-item" href="#overloading"><span class="nav-icon">🔀</span> Function Overloading</a>
+    <a class="nav-item" href="#overriding"><span class="nav-icon">⚡</span> Virtual &amp; Overriding</a>
+    <a class="nav-item" href="#operator"><span class="nav-icon">🛠️</span> Operator Overloading</a>
+  </div>
+
+  <!-- Author Card -->
+  <div class="sidebar-author">
+    <div class="author-card">
+      <div class="author-name">Shahamat Shakeel</div>
+      <div class="author-handle">@shahamatshakeel-ux</div>
+      <div class="author-links">
+        <a class="author-link gh" href="https://github.com/shahamatshakeel-ux" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a class="author-link li" href="https://www.linkedin.com/in/shahamat-shakil-55a8a427a" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ MAIN ══════════ -->
+<main id="main">
+
+  <!-- TOP CONTACT BAR -->
+  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 28px;background:var(--bg2);border-bottom:1px solid var(--border);">
+    <span style="font-family:var(--code-font);font-size:0.72rem;color:var(--muted);">✦ Created by <strong style="color:var(--text);">Shahamat Shakeel</strong></span>
+    <div style="flex:1;height:1px;background:var(--border);min-width:10px;"></div>
+    <a href="https://github.com/shahamatshakeel-ux" target="_blank"
+      style="display:flex;align-items:center;gap:7px;padding:6px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:0.75rem;font-family:var(--code-font);transition:all .2s;"
+      onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/shahamat-shakil-55a8a427a" target="_blank"
+      style="display:flex;align-items:center;gap:7px;padding:6px 16px;background:rgba(10,102,194,0.1);border:1px solid rgba(10,102,194,0.3);border-radius:8px;color:#60a5fa;text-decoration:none;font-size:0.75rem;font-family:var(--code-font);transition:all .2s;"
+      onmouseover="this.style.borderColor='#60a5fa'" onmouseout="this.style.borderColor='rgba(10,102,194,0.3)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+  </div>
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <h1>Object-Oriented<br/><span>Programming</span><br/>Revision Guide</h1>
+    <p>A complete visual and code-first guide to every OOP concept — from classes to diamond inheritance to operator overloading.</p>
+    <div class="hero-chips">
+      <span class="chip cyan" onclick="location.href='#class-object'">🧱 Class &amp; Object</span>
+      <span class="chip purple" onclick="location.href='#constructor'">⚙️ Constructors</span>
+      <span class="chip cyan" onclick="location.href='#copy-types'">📋 Shallow vs Deep</span>
+      <span class="chip amber" onclick="location.href='#inheritance'">🌳 Inheritance</span>
+      <span class="chip green" onclick="location.href='#polymorphism'">🎭 Polymorphism</span>
+      <span class="chip pink" onclick="location.href='#operator'">🛠️ Operators</span>
+    </div>
+  </section>
+
+  <!-- ══ 1. CLASS & OBJECT ══ -->
+  <section class="section" id="class-object">
+    <div class="section-header">
+      <div class="section-icon icon-cyan">🧱</div>
+      <div class="section-title-block">
+        <h2>Class &amp; Object</h2>
+        <p>The blueprint and the instance — the foundation of every OOP program.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Class <span class="tag">blueprint</span></h3>
+        <p>A user-defined data type that groups <strong style="color:#fff">data members</strong> (attributes) and <strong style="color:#fff">member functions</strong> (methods) under one name. It acts as a template — no memory is allocated until an object is created.</p>
+      </div>
+      <div class="card">
+        <h3>Object <span class="tag">instance</span></h3>
+        <p>A real-world entity created from a class. When an object is instantiated, memory is allocated for its data members. Multiple objects can be created from the same class, each with their own state.</p>
+      </div>
+      <div class="card">
+        <h3>Access Specifiers</h3>
+        <p><strong style="color:var(--green)">public:</strong> Accessible everywhere.<br/>
+           <strong style="color:var(--accent3)">private:</strong> Only within the class (default).<br/>
+           <strong style="color:#a78bfa">protected:</strong> Class + derived classes.</p>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">class_object.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="cm">// ── Class Definition ──────────────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Car</span> {
+<span class="kw">private</span>:                          <span class="cm">// hidden from outside</span>
+    <span class="tp">string</span> brand;
+    <span class="tp">int</span>    speed;
+
+<span class="kw">public</span>:                           <span class="cm">// accessible anywhere</span>
+    <span class="cm">// Setter</span>
+    <span class="kw">void</span> <span class="fn">setBrand</span>(<span class="tp">string</span> b) { brand = b; }
+    <span class="kw">void</span> <span class="fn">setSpeed</span>(<span class="tp">int</span> s)    { speed = s; }
+
+    <span class="cm">// Getter</span>
+    <span class="tp">string</span> <span class="fn">getBrand</span>() { <span class="kw">return</span> brand; }
+    <span class="tp">int</span>    <span class="fn">getSpeed</span>() { <span class="kw">return</span> speed; }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        cout &lt;&lt; brand &lt;&lt; <span class="str">" runs at "</span> &lt;&lt; speed &lt;&lt; <span class="str">" km/h\n"</span>;
+    }
+};
+
+<span class="cm">// ── Object Creation ───────────────────────────────────────</span>
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Car</span> c1;                       <span class="cm">// object on stack</span>
+    c1.<span class="fn">setBrand</span>(<span class="str">"Toyota"</span>);
+    c1.<span class="fn">setSpeed</span>(<span class="nm">120</span>);
+    c1.<span class="fn">display</span>();                <span class="cm">// Toyota runs at 120 km/h</span>
+
+    <span class="cls">Car</span>* c2 = <span class="kw">new</span> <span class="cls">Car</span>();          <span class="cm">// object on heap</span>
+    c2-><span class="fn">setBrand</span>(<span class="str">"BMW"</span>);
+    <span class="kw">delete</span> c2;                    <span class="cm">// free heap memory</span>
+}</pre>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 2. CONSTRUCTOR ══ -->
+  <section class="section" id="constructor">
+    <div class="section-header">
+      <div class="section-icon icon-purple">⚙️</div>
+      <div class="section-title-block">
+        <h2>Constructor &amp; Its Types</h2>
+        <p>Special member function automatically called when an object is created.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Key Rules</strong>
+        Constructor name = class name • No return type (not even void) • Called automatically at object creation • Can be overloaded • Cannot be inherited or virtual
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Parameters</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>None</td><td>Initialises members to default values</td></tr>
+          <tr><td>Parameterised</td><td>One or more arguments</td><td>Initialises members with given values</td></tr>
+          <tr><td>Copy</td><td>Reference to same class object</td><td>Creates a copy of an existing object</td></tr>
+          <tr><td>Move (C++11)</td><td>Rvalue reference</td><td>Transfers ownership of resources</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">constructors.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Student</span> {
+<span class="kw">public</span>:
+    <span class="tp">string</span> name;
+    <span class="tp">int</span> age;
+
+    <span class="cm">// ① Default Constructor</span>
+    <span class="cls">Student</span>() {
+        name = <span class="str">"Unknown"</span>;
+        age  = <span class="nm">0</span>;
+        cout &lt;&lt; <span class="str">"Default constructor called\n"</span>;
+    }
+
+    <span class="cm">// ② Parameterised Constructor</span>
+    <span class="cls">Student</span>(<span class="tp">string</span> n, <span class="tp">int</span> a) : name(n), age(a) {   <span class="cm">// initialiser list</span>
+        cout &lt;&lt; <span class="str">"Parameterised constructor called\n"</span>;
+    }
+
+    <span class="cm">// ③ Copy Constructor</span>
+    <span class="cls">Student</span>(<span class="kw">const</span> <span class="cls">Student</span><span class="op">&amp;</span> s) {
+        name = s.name;
+        age  = s.age;
+        cout &lt;&lt; <span class="str">"Copy constructor called\n"</span>;
+    }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Student</span> s1;                        <span class="cm">// Default</span>
+    <span class="cls">Student</span> s2(<span class="str">"Alice"</span>, <span class="nm">20</span>);           <span class="cm">// Parameterised</span>
+    <span class="cls">Student</span> s3(s2);                    <span class="cm">// Copy</span>
+    <span class="cls">Student</span> s4 = s2;                   <span class="cm">// Also calls Copy constructor</span>
+}</pre>
+    </div>
+
+    <div class="sub-title">Constructor Overloading</div>
+    <div class="callout callout-tip">
+      <span class="callout-icon">✅</span>
+      <div class="callout-content">
+        <strong>Constructor Overloading</strong>
+        Defining multiple constructors with <em>different parameter lists</em> in the same class. The compiler selects the right one based on the arguments passed.
+      </div>
+    </div>
+
+    <div class="quick-summary">
+      <h4>⚡ Quick Revision — Constructors</h4>
+      <ul>
+        <li>Same name as class, no return type, auto-called at object creation</li>
+        <li><strong style="color:#fff">Default:</strong> no params — sets members to default values</li>
+        <li><strong style="color:#fff">Parameterised:</strong> accepts args — use initialiser list for efficiency</li>
+        <li><strong style="color:#fff">Copy constructor:</strong> takes <code style="color:var(--accent)">const ClassName&amp;</code> — called on copy/pass-by-value</li>
+        <li>Constructors can be overloaded but NOT inherited or virtual</li>
+        <li>If you define <em>any</em> constructor, the compiler no longer provides a default one</li>
+      </ul>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 2b. SHALLOW vs DEEP COPY ══ -->
+  <section class="section" id="copy-types">
+    <div class="section-header">
+      <div class="section-icon icon-cyan">📋</div>
+      <div class="section-title-block">
+        <h2>Shallow Copy vs Deep Copy</h2>
+        <p>How objects are duplicated — critical when your class manages dynamic (heap) memory.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Why Does This Matter?</strong>
+        When a class contains a <strong style="color:#fff">raw pointer to heap memory</strong>, the default compiler-generated copy constructor only copies the pointer address — not the actual data. This is a <em>Shallow Copy</em>. It causes <strong style="color:var(--red)">double-deletion crashes</strong> and data corruption. A <em>Deep Copy</em> allocates brand-new memory and duplicates the actual data.
+      </div>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-col" style="border-color:rgba(239,68,68,0.3);">
+        <div class="compare-col-header" style="color:var(--red);">🪞 Shallow Copy <span style="font-family:var(--code-font);font-size:0.65rem;background:rgba(239,68,68,0.12);padding:2px 8px;border-radius:4px;margin-left:4px;">compiler default</span></div>
+        <p style="font-size:0.84rem;color:#94a3b8;line-height:1.65;">Copies only the <strong style="color:#fff">pointer address</strong>, not the data it points to. Both objects share the <strong style="color:var(--red)">same heap block</strong>.</p>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(239,68,68,0.06);border-radius:8px;font-size:0.8rem;color:var(--red);">⚠️ When one object is destroyed, <code>delete</code> frees shared memory. The other now holds a <strong>dangling pointer</strong> → undefined behaviour + crash!</div>
+      </div>
+      <div class="compare-col" style="border-color:rgba(16,185,129,0.3);">
+        <div class="compare-col-header" style="color:var(--green);">🔒 Deep Copy <span style="font-family:var(--code-font);font-size:0.65rem;background:rgba(16,185,129,0.12);padding:2px 8px;border-radius:4px;margin-left:4px;">must write manually</span></div>
+        <p style="font-size:0.84rem;color:#94a3b8;line-height:1.65;">Allocates <strong style="color:#fff">brand-new memory</strong> and copies the actual data into it. Original and copy are completely <strong style="color:var(--green)">independent</strong>.</p>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(16,185,129,0.06);border-radius:8px;font-size:0.8rem;color:var(--green);">✅ Each object owns its own memory. Both destructors run safely with no double-free or data corruption.</div>
+      </div>
+    </div>
+
+    <!-- Memory diagram -->
+    <div class="mem-diagram">
+      <div class="mem-diagram-title">Memory Layout — Shallow vs Deep</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div>
+          <div style="font-size:0.78rem;color:var(--red);font-family:var(--code-font);margin-bottom:12px;font-weight:600;">❌ Shallow Copy</div>
+          <div class="mem-row"><div class="mem-box red">obj1.ptr</div><div class="mem-arrow">─┐</div></div>
+          <div class="mem-row"><div class="mem-box red">obj2.ptr</div><div class="mem-arrow">─┘</div><div class="mem-box amber" style="margin-left:4px;">[ data: 42 ] ← SHARED</div></div>
+          <div style="margin-top:10px;font-size:0.76rem;color:#64748b;">Both pointers → same heap block. Deleting obj1 corrupts obj2.</div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--green);font-family:var(--code-font);margin-bottom:12px;font-weight:600;">✅ Deep Copy</div>
+          <div class="mem-row"><div class="mem-box green">obj1.ptr</div><div class="mem-arrow">──→</div><div class="mem-box cyan">[ data: 42 ]</div></div>
+          <div style="height:8px;"></div>
+          <div class="mem-row"><div class="mem-box green">obj2.ptr</div><div class="mem-arrow">──→</div><div class="mem-box cyan">[ data: 42 ] ← clone</div></div>
+          <div style="margin-top:10px;font-size:0.76rem;color:#64748b;">Independent blocks. Safe to delete either object.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">shallow_vs_deep_copy.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Array</span> {
+<span class="kw">private</span>:
+    <span class="tp">int</span>*  data;
+    <span class="tp">int</span>   size;
+<span class="kw">public</span>:
+    <span class="cls">Array</span>(<span class="tp">int</span> s) : size(s) {
+        data = <span class="kw">new</span> <span class="tp">int</span>[size];
+        <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; size; i++) data[i] = i * <span class="nm">10</span>;
+    }
+
+    <span class="cm">// ❌ Shallow (compiler default — DO NOT rely on this for pointer classes)</span>
+    <span class="cm">// Array(const Array&amp; o) { size=o.size; data=o.data; }  ← copies address only!</span>
+
+    <span class="cm">// ✅ Deep Copy Constructor</span>
+    <span class="cls">Array</span>(<span class="kw">const</span> <span class="cls">Array</span><span class="op">&amp;</span> o) : size(o.size) {
+        data = <span class="kw">new</span> <span class="tp">int</span>[size];             <span class="cm">// allocate fresh memory</span>
+        <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; size; i++)
+            data[i] = o.data[i];           <span class="cm">// copy actual values</span>
+    }
+
+    <span class="cm">// ✅ Deep Copy Assignment Operator</span>
+    <span class="cls">Array</span><span class="op">&amp;</span> <span class="kw">operator</span>=(<span class="kw">const</span> <span class="cls">Array</span><span class="op">&amp;</span> o) {
+        <span class="kw">if</span> (<span class="kw">this</span> == <span class="op">&amp;</span>o) <span class="kw">return</span> *<span class="kw">this</span>;     <span class="cm">// self-assignment guard</span>
+        <span class="kw">delete</span>[] data;                     <span class="cm">// free OLD memory first!</span>
+        size = o.size;
+        data = <span class="kw">new</span> <span class="tp">int</span>[size];
+        <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; size; i++) data[i] = o.data[i];
+        <span class="kw">return</span> *<span class="kw">this</span>;
+    }
+
+    ~<span class="cls">Array</span>() { <span class="kw">delete</span>[] data; }         <span class="cm">// destructor — frees its OWN memory</span>
+
+    <span class="kw">void</span> <span class="fn">modify</span>(<span class="tp">int</span> i, <span class="tp">int</span> v) { data[i] = v; }
+    <span class="kw">void</span> <span class="fn">print</span>() { <span class="kw">for</span>(<span class="tp">int</span> i=<span class="nm">0</span>;i&lt;size;i++) cout&lt;&lt;data[i]&lt;&lt;<span class="str">" "</span>; cout&lt;&lt;<span class="str">"\n"</span>; }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Array</span> a(<span class="nm">3</span>);           <span class="cm">// a → [0, 10, 20]</span>
+    <span class="cls">Array</span> b(a);            <span class="cm">// Deep copy → b gets its OWN [0, 10, 20]</span>
+
+    b.<span class="fn">modify</span>(<span class="nm">0</span>, <span class="nm">99</span>);      <span class="cm">// modify b only</span>
+    a.<span class="fn">print</span>();             <span class="cm">// 0 10 20  ← a is UNAFFECTED ✅</span>
+    b.<span class="fn">print</span>();             <span class="cm">// 99 10 20</span>
+}                          <span class="cm">// both destructors run safely — no double-free!</span></pre>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Shallow Copy</th><th>Deep Copy</th></tr></thead>
+        <tbody>
+          <tr><td>What is copied</td><td>Pointer address only</td><td>Address + actual heap data</td></tr>
+          <tr><td>Memory independence</td><td style="color:var(--red)">❌ Shared memory</td><td style="color:var(--green)">✅ Fully independent</td></tr>
+          <tr><td>Risk</td><td style="color:var(--red)">Double-free, dangling pointer, crash</td><td style="color:var(--green)">None (if written correctly)</td></tr>
+          <tr><td>Performance</td><td style="color:var(--green)">Faster (just copies address)</td><td style="color:var(--accent3)">Slower (alloc + copy data)</td></tr>
+          <tr><td>Provided by compiler?</td><td>✅ Yes — this is the default</td><td>❌ Must write manually</td></tr>
+          <tr><td>When to use</td><td>No raw pointer members</td><td>Class owns dynamic memory</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Rule of Three (C++03) / Rule of Five (C++11)</strong>
+        If your class needs a custom <code style="color:var(--accent)">Destructor</code>, it almost certainly also needs a custom <code style="color:var(--accent)">Copy Constructor</code> and <code style="color:var(--accent)">Copy Assignment Operator</code> (Rule of Three). In C++11 add <code style="color:var(--accent)">Move Constructor</code> and <code style="color:var(--accent)">Move Assignment Operator</code> too — that is the Rule of Five.
+      </div>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 3. DESTRUCTOR ══ -->
+  <section class="section" id="destructor">
+    <div class="section-header">
+      <div class="section-icon icon-red">🗑️</div>
+      <div class="section-title-block">
+        <h2>Destructor</h2>
+        <p>Automatically called when an object goes out of scope or is deleted.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Syntax</h3>
+        <p>Same name as class with a tilde <strong style="color:var(--accent)">~</strong> prefix. <br/>No parameters, no return type.<br/>Only ONE destructor per class.<br/>Cannot be overloaded.</p>
+      </div>
+      <div class="card">
+        <h3>When is it Called?</h3>
+        <p>• Stack object → exits its scope block<br/>
+           • Heap object → <code style="color:var(--accent)">delete</code> is called<br/>
+           • Static object → end of program<br/>
+           • Called in <em>reverse</em> order of construction</p>
+      </div>
+      <div class="card">
+        <h3>Why Important?</h3>
+        <p>Essential for releasing <strong style="color:#fff">dynamic memory</strong>, closing files, releasing network connections, and preventing <strong style="color:var(--red)">memory leaks</strong>.</p>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">destructor.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Buffer</span> {
+<span class="kw">private</span>:
+    <span class="tp">int</span>* data;
+<span class="kw">public</span>:
+    <span class="cls">Buffer</span>(<span class="tp">int</span> size) {
+        data = <span class="kw">new</span> <span class="tp">int</span>[size];           <span class="cm">// allocate on heap</span>
+        cout &lt;&lt; <span class="str">"Buffer created\n"</span>;
+    }
+
+    ~<span class="cls">Buffer</span>() {                         <span class="cm">// Destructor</span>
+        <span class="kw">delete</span>[] data;                  <span class="cm">// free memory ← crucial!</span>
+        cout &lt;&lt; <span class="str">"Buffer destroyed\n"</span>;
+    }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    {
+        <span class="cls">Buffer</span> b(<span class="nm">100</span>);                  <span class="cm">// constructor called</span>
+    }                                   <span class="cm">// destructor called here (scope ends)</span>
+
+    <span class="cls">Buffer</span>* p = <span class="kw">new</span> <span class="cls">Buffer</span>(<span class="nm">50</span>);
+    <span class="kw">delete</span> p;                           <span class="cm">// destructor called explicitly</span>
+}</pre>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 4. ENCAPSULATION ══ -->
+  <section class="section" id="encapsulation">
+    <div class="section-header">
+      <div class="section-icon icon-amber">🔒</div>
+      <div class="section-title-block">
+        <h2>Encapsulation</h2>
+        <p>Wrapping data and functions into a single unit and restricting direct access.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">📦</span>
+      <div class="callout-content">
+        <strong>Core Idea</strong>
+        Data is declared <code style="color:var(--accent)">private</code> and can only be accessed/modified through <code style="color:var(--green)">public</code> getter/setter functions. This prevents accidental corruption of internal state.
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-item">
+        <h4>🛡️ Data Hiding</h4>
+        <p>Private members are invisible outside the class — only the class knows its own internals.</p>
+      </div>
+      <div class="concept-item">
+        <h4>🔧 Controlled Access</h4>
+        <p>Getters and setters act as controlled gates — you can add validation inside them.</p>
+      </div>
+      <div class="concept-item">
+        <h4>🔄 Abstraction Support</h4>
+        <p>Users interact with a clean interface, unaware of internal complexity.</p>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">encapsulation.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">BankAccount</span> {
+<span class="kw">private</span>:
+    <span class="tp">double</span> balance;                    <span class="cm">// hidden — can't touch directly</span>
+
+<span class="kw">public</span>:
+    <span class="cls">BankAccount</span>(<span class="tp">double</span> b) : balance(b) {}
+
+    <span class="kw">void</span> <span class="fn">deposit</span>(<span class="tp">double</span> amt) {
+        <span class="kw">if</span> (amt > <span class="nm">0</span>) balance += amt;    <span class="cm">// validated setter</span>
+    }
+    <span class="kw">void</span> <span class="fn">withdraw</span>(<span class="tp">double</span> amt) {
+        <span class="kw">if</span> (amt &lt;= balance) balance -= amt;
+        <span class="kw">else</span> cout &lt;&lt; <span class="str">"Insufficient funds!\n"</span>;
+    }
+    <span class="tp">double</span> <span class="fn">getBalance</span>() <span class="kw">const</span> { <span class="kw">return</span> balance; }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">BankAccount</span> acc(<span class="nm">1000.0</span>);
+    acc.<span class="fn">deposit</span>(<span class="nm">500</span>);
+    acc.<span class="fn">withdraw</span>(<span class="nm">200</span>);
+    <span class="cm">// acc.balance = -999;  ← COMPILE ERROR — private!</span>
+    cout &lt;&lt; acc.<span class="fn">getBalance</span>();       <span class="cm">// 1300</span>
+}</pre>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 5. ASSOCIATION ══ -->
+  <section class="section" id="association">
+    <div class="section-header">
+      <div class="section-icon icon-green">🔗</div>
+      <div class="section-title-block">
+        <h2>Association, Aggregation &amp; Composition</h2>
+        <p>Three ways to model relationships between objects.</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Relationship</th><th>Ownership</th><th>Lifetime</th><th>Real-World Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--accent)">Association</strong></td><td>None / uses</td><td>Independent</td><td>Teacher ↔ Student</td></tr>
+          <tr><td><strong style="color:#a78bfa">Aggregation</strong></td><td>Weak "has-a"</td><td>Child exists independently</td><td>Department has Employees</td></tr>
+          <tr><td><strong style="color:var(--green)">Composition</strong></td><td>Strong "has-a"</td><td>Child dies with parent</td><td>House has Rooms</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">Association</div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">association.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="cm">// Association — objects are independent, just interact</span>
+<span class="kw">class</span> <span class="cls">Student</span> { <span class="kw">public</span>: <span class="tp">string</span> name; };
+<span class="kw">class</span> <span class="cls">Teacher</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">teach</span>(<span class="cls">Student</span><span class="op">&amp;</span> s) {           <span class="cm">// uses Student, doesn't own it</span>
+        cout &lt;&lt; <span class="str">"Teaching "</span> &lt;&lt; s.name &lt;&lt; endl;
+    }
+};</pre>
+    </div>
+
+    <div class="sub-title">Aggregation (Weak has-a)</div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">aggregation.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Employee</span> { <span class="kw">public</span>: <span class="tp">string</span> name; };
+
+<span class="kw">class</span> <span class="cls">Department</span> {
+<span class="kw">private</span>:
+    <span class="cls">Employee</span>* emp;                     <span class="cm">// pointer — doesn't own</span>
+<span class="kw">public</span>:
+    <span class="cls">Department</span>(<span class="cls">Employee</span>* e) : emp(e) {}
+    <span class="cm">// Employee can exist without Department</span>
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Employee</span> e; e.name = <span class="str">"Bob"</span>;
+    <span class="cls">Department</span> d(<span class="op">&amp;</span>e);                  <span class="cm">// e survives even if d is destroyed</span>
+}</pre>
+    </div>
+
+    <div class="sub-title">Composition (Strong has-a)</div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">composition.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Room</span> { <span class="kw">public</span>: <span class="tp">string</span> type; };
+
+<span class="kw">class</span> <span class="cls">House</span> {
+<span class="kw">private</span>:
+    <span class="cls">Room</span> hall;                         <span class="cm">// object by value — owns it</span>
+    <span class="cls">Room</span> bedroom;
+<span class="kw">public</span>:
+    <span class="cls">House</span>() {
+        hall.type    = <span class="str">"Hall"</span>;
+        bedroom.type = <span class="str">"Bedroom"</span>;
+    }
+    <span class="cm">// Rooms are destroyed WITH the House</span>
+};</pre>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 6. INHERITANCE ══ -->
+  <section class="section" id="inheritance">
+    <div class="section-header">
+      <div class="section-icon icon-pink">🌳</div>
+      <div class="section-title-block">
+        <h2>Inheritance &amp; All Its Types</h2>
+        <p>Mechanism to derive a new class from an existing class, reusing its properties.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-content">
+        <strong>Syntax:</strong> <code style="color:var(--accent)">class Derived : [access] Base { };</code><br/>
+        Access modes: <strong style="color:var(--green)">public</strong> (most common), <strong style="color:#a78bfa">protected</strong>, <strong style="color:var(--accent3)">private</strong>
+      </div>
+    </div>
+
+    <div class="pills">
+      <span class="pill pill-cyan">Single</span>
+      <span class="pill pill-purple">Multiple</span>
+      <span class="pill pill-green">Multilevel</span>
+      <span class="pill pill-amber">Hierarchical</span>
+      <span class="pill pill-pink">Hybrid</span>
+      <span class="pill pill-red">Diamond Problem</span>
+    </div>
+
+    <!-- Visual Tree -->
+    <div class="tree-wrap">
+      <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;align-items:flex-start;">
+        <!-- Single -->
+        <div style="text-align:center;">
+          <div style="font-size:0.7rem;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Single</div>
+          <div class="tree-node node-base">Animal</div>
+          <div class="tree-connector"><div class="tree-line"></div></div>
+          <div class="tree-node node-child">Dog</div>
+        </div>
+        <!-- Multilevel -->
+        <div style="text-align:center;">
+          <div style="font-size:0.7rem;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Multilevel</div>
+          <div class="tree-node node-base">Animal</div>
+          <div class="tree-connector"><div class="tree-line"></div></div>
+          <div class="tree-node node-mid">Dog</div>
+          <div class="tree-connector"><div class="tree-line"></div></div>
+          <div class="tree-node node-child">Puppy</div>
+        </div>
+        <!-- Multiple -->
+        <div style="text-align:center;">
+          <div style="font-size:0.7rem;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Multiple</div>
+          <div style="display:flex;gap:20px;justify-content:center;">
+            <div class="tree-node node-base">ClassA</div>
+            <div class="tree-node node-mid">ClassB</div>
+          </div>
+          <div class="tree-connector"><div class="tree-line"></div></div>
+          <div class="tree-node node-child">ClassC</div>
+        </div>
+        <!-- Diamond -->
+        <div style="text-align:center;">
+          <div style="font-size:0.7rem;color:var(--red);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;">Diamond ⚠️</div>
+          <div class="tree-node node-base">Base</div>
+          <div style="display:flex;gap:30px;justify-content:center;margin:8px 0;">
+            <div>
+              <div class="tree-connector" style="align-items:flex-end;"><div class="tree-line"></div></div>
+              <div class="tree-node node-mid" style="min-width:80px;">Left</div>
+            </div>
+            <div>
+              <div class="tree-connector" style="align-items:flex-start;"><div class="tree-line"></div></div>
+              <div class="tree-node node-mid" style="min-width:80px;">Right</div>
+            </div>
+          </div>
+          <div class="tree-node node-diamond" style="margin:8px auto;">Derived ❓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">inheritance_types.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="cm">// ── ① Single Inheritance ──────────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Animal</span> {
+<span class="kw">public</span>: <span class="kw">void</span> <span class="fn">eat</span>() { cout &lt;&lt; <span class="str">"Eating\n"</span>; }
+};
+<span class="kw">class</span> <span class="cls">Dog</span> : <span class="kw">public</span> <span class="cls">Animal</span> {          <span class="cm">// single base</span>
+<span class="kw">public</span>: <span class="kw">void</span> <span class="fn">bark</span>() { cout &lt;&lt; <span class="str">"Woof!\n"</span>; }
+};
+
+<span class="cm">// ── ② Multiple Inheritance ────────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Flyable</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">fly</span>()  { cout &lt;&lt; <span class="str">"Flying\n"</span>; } };
+<span class="kw">class</span> <span class="cls">Swimmable</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="fn">swim</span>() { cout &lt;&lt; <span class="str">"Swimming\n"</span>; } };
+<span class="kw">class</span> <span class="cls">Duck</span> : <span class="kw">public</span> <span class="cls">Flyable</span>, <span class="kw">public</span> <span class="cls">Swimmable</span> {};
+
+<span class="cm">// ── ③ Multilevel Inheritance ──────────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Puppy</span> : <span class="kw">public</span> <span class="cls">Dog</span> {           <span class="cm">// Dog inherits Animal, Puppy inherits Dog</span>
+<span class="kw">public</span>: <span class="kw">void</span> <span class="fn">play</span>() { cout &lt;&lt; <span class="str">"Playing!\n"</span>; }
+};
+
+<span class="cm">// ── ④ Hierarchical Inheritance ───────────────────────────</span>
+<span class="kw">class</span> <span class="cls">Cat</span> : <span class="kw">public</span> <span class="cls">Animal</span> {};       <span class="cm">// multiple classes from same base</span>
+<span class="kw">class</span> <span class="cls">Bird</span> : <span class="kw">public</span> <span class="cls">Animal</span> {};
+
+<span class="cm">// ── ⑤ Diamond Problem &amp; Virtual Inheritance ──────────────</span>
+<span class="kw">class</span> <span class="cls">Base</span>  { <span class="kw">public</span>: <span class="tp">int</span> x = <span class="nm">10</span>; };
+<span class="kw">class</span> <span class="cls">Left</span>  : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">Base</span> {}; <span class="cm">// virtual keyword saves us!</span>
+<span class="kw">class</span> <span class="cls">Right</span> : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">Base</span> {};
+<span class="kw">class</span> <span class="cls">Bottom</span> : <span class="kw">public</span> <span class="cls">Left</span>, <span class="kw">public</span> <span class="cls">Right</span> {};
+<span class="cm">// Without virtual: Bottom has TWO copies of Base::x → ambiguity error</span>
+<span class="cm">// With    virtual: Only ONE shared copy of Base::x  → resolved!</span>
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Bottom</span> b;
+    cout &lt;&lt; b.x;  <span class="cm">// 10 — unambiguous because of virtual inheritance</span>
+}</pre>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>The Diamond Problem</strong>
+        When two parent classes share the same grandparent, the grandchild gets duplicate copies of grandparent members. Solution: use <code style="color:var(--accent)">virtual</code> inheritance so only ONE shared copy exists.
+      </div>
+    </div>
+
+    <!-- ── DIAMOND PROBLEM DETAIL ────────────────── -->
+    <div class="sub-title" style="color:var(--red);">🔷 Diamond Problem — In Depth</div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Core Idea</strong>
+        The Diamond Problem occurs when class <strong style="color:#fff">D</strong> inherits from classes <strong style="color:#fff">B</strong> and <strong style="color:#fff">C</strong>, and both B and C inherit from the same base class <strong style="color:#fff">A</strong>. The inheritance hierarchy forms a diamond shape. Without <code style="color:var(--accent)">virtual</code>, class D ends up with <strong style="color:var(--red)">two separate copies</strong> of A's members, and the compiler cannot decide which one to use — this is called <strong style="color:var(--red)">ambiguity</strong>.
+      </div>
+    </div>
+
+    <!-- 3-card overview -->
+    <div class="cards">
+      <div class="card" style="border-color:rgba(239,68,68,0.3);">
+        <h3>❌ The Problem</h3>
+        <p>
+          <code style="color:#a78bfa">D obj;</code><br/>
+          <code style="color:var(--red)">obj.show(); &nbsp;// COMPILE ERROR</code><br/><br/>
+          The compiler is confused — two inheritance paths both lead to a copy of <strong style="color:#fff">A::show()</strong>:<br/>
+          • Path 1: D → B → A<br/>
+          • Path 2: D → C → A<br/><br/>
+          <strong style="color:var(--red)">Result:</strong> 2 copies of A exist in D → ambiguity!
+        </p>
+      </div>
+      <div class="card" style="border-color:rgba(16,185,129,0.3);">
+        <h3>✅ The Solution</h3>
+        <p>
+          Add <code style="color:var(--accent)">virtual</code> when B and C inherit from A:<br/><br/>
+          <code style="color:#a78bfa">class B : <strong style="color:var(--accent)">virtual</strong> public A {};</code><br/>
+          <code style="color:#a78bfa">class C : <strong style="color:var(--accent)">virtual</strong> public A {};</code><br/><br/>
+          <strong style="color:var(--green)">virtual</strong> tells the compiler: "share one single copy of A across the whole hierarchy."<br/><br/>
+          ✔️ Only <strong style="color:var(--green)">ONE copy</strong> of A in D — ambiguity resolved!
+        </p>
+      </div>
+      <div class="card" style="border-color:rgba(245,158,11,0.3);">
+        <h3>⚡ Workaround (No virtual)</h3>
+        <p>
+          Before virtual inheritance, you could force a specific path using <strong style="color:var(--accent3)">scope resolution</strong>:<br/><br/>
+          <code style="color:#a78bfa">obj.<strong style="color:var(--accent3)">B::</strong>show();</code> &nbsp;← uses B's path<br/>
+          <code style="color:#a78bfa">obj.<strong style="color:var(--accent3)">C::</strong>show();</code> &nbsp;← uses C's path<br/><br/>
+          ⚠️ Verbose and fragile. <code style="color:var(--accent)">virtual</code> is always the correct fix.
+        </p>
+      </div>
+    </div>
+
+    <!-- SVG Diamond diagrams side-by-side -->
+    <div class="diamond-visual-wrap">
+      <div class="dvw-title">Inheritance Hierarchy — Visual Diamond Shape</div>
+      <div style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;align-items:flex-start;">
+
+        <!-- WITHOUT virtual -->
+        <div style="flex:1;min-width:260px;max-width:360px;">
+          <div style="text-align:center;font-size:0.72rem;font-family:var(--code-font);color:var(--red);font-weight:700;margin-bottom:18px;letter-spacing:.06em;">WITHOUT virtual ❌  —  2 Copies of A</div>
+          <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;display:block;margin:0 auto;">
+            <!-- A top -->
+            <rect x="100" y="10" width="100" height="38" rx="8" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1.5"/>
+            <text x="150" y="34" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#ef4444">class A</text>
+            <!-- arrows down to B and C -->
+            <line x1="130" y1="48" x2="80" y2="108" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="170" y1="48" x2="220" y2="108" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <!-- B -->
+            <rect x="30" y="108" width="100" height="38" rx="8" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="80" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#a78bfa">class B</text>
+            <!-- C -->
+            <rect x="170" y="108" width="100" height="38" rx="8" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="220" y="132" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#a78bfa">class C</text>
+            <!-- copy of A labels inside B/C subgraph -->
+            <rect x="30" y="156" width="100" height="30" rx="6" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="80" y="176" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#ef4444">copy of A</text>
+            <rect x="170" y="156" width="100" height="30" rx="6" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="220" y="176" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#ef4444">copy of A</text>
+            <!-- arrows to D -->
+            <line x1="80" y1="186" x2="140" y2="216" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="220" y1="186" x2="160" y2="216" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <!-- D -->
+            <rect x="90" y="216" width="120" height="38" rx="8" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+            <text x="150" y="240" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#ef4444">class D 😵</text>
+          </svg>
+          <div style="text-align:center;margin-top:12px;font-size:0.76rem;color:var(--red);font-family:var(--code-font);">D contains 2 copies of A → ambiguity error</div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div style="width:1px;background:var(--border);align-self:stretch;margin:0 8px;"></div>
+
+        <!-- WITH virtual -->
+        <div style="flex:1;min-width:260px;max-width:360px;">
+          <div style="text-align:center;font-size:0.72rem;font-family:var(--code-font);color:var(--green);font-weight:700;margin-bottom:18px;letter-spacing:.06em;">WITH virtual ✅  —  1 Shared Copy of A</div>
+          <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;display:block;margin:0 auto;">
+            <!-- A top — shared, glowing -->
+            <rect x="85" y="10" width="130" height="38" rx="8" fill="rgba(0,229,255,0.12)" stroke="#00e5ff" stroke-width="2"/>
+            <text x="150" y="34" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#00e5ff">class A  🔗shared</text>
+            <!-- arrows down to B and C (solid = virtual) -->
+            <line x1="120" y1="48" x2="80" y2="108" stroke="#00e5ff" stroke-width="2" opacity=".5"/>
+            <line x1="180" y1="48" x2="220" y2="108" stroke="#00e5ff" stroke-width="2" opacity=".5"/>
+            <!-- B virtual label -->
+            <rect x="30" y="108" width="110" height="38" rx="8" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="85" y="128" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#a78bfa">class B</text>
+            <text x="85" y="141" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#00e5ff">virtual</text>
+            <!-- C virtual label -->
+            <rect x="160" y="108" width="110" height="38" rx="8" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="215" y="128" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#a78bfa">class C</text>
+            <text x="215" y="141" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#00e5ff">virtual</text>
+            <!-- arrows to D -->
+            <line x1="85" y1="146" x2="140" y2="216" stroke="#10b981" stroke-width="1.5"/>
+            <line x1="215" y1="146" x2="160" y2="216" stroke="#10b981" stroke-width="1.5"/>
+            <!-- D -->
+            <rect x="90" y="216" width="120" height="38" rx="8" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="2"/>
+            <text x="150" y="240" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" fill="#10b981">class D ✅</text>
+          </svg>
+          <div style="text-align:center;margin-top:12px;font-size:0.76rem;color:var(--green);font-family:var(--code-font);">D has only 1 copy of A → fully resolved</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Memory layout -->
+    <div class="sub-title">🧠 Memory Layout — What Sits Inside D?</div>
+    <div class="compare-grid">
+      <div class="compare-col" style="border-color:rgba(239,68,68,0.3);">
+        <div class="compare-col-header" style="color:var(--red);">❌ Without <code style="color:var(--accent)">virtual</code></div>
+        <div class="mem-diagram" style="margin:0;background:transparent;border:none;padding:0;">
+          <div class="mem-row"><div class="mem-box red" style="width:100%;">A subobject (from B) — x = 10</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box purple" style="width:100%;">B members</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box red" style="width:100%;">A subobject (from C) — x = 10 ← DUPLICATE!</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box purple" style="width:100%;">C members</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box amber" style="width:100%;">D's own members</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:0.78rem;color:var(--red);">Two A subobjects → accessing <code>x</code> is ambiguous!</div>
+      </div>
+      <div class="compare-col" style="border-color:rgba(16,185,129,0.3);">
+        <div class="compare-col-header" style="color:var(--green);">✅ With <code style="color:var(--accent)">virtual</code></div>
+        <div class="mem-diagram" style="margin:0;background:transparent;border:none;padding:0;">
+          <div class="mem-row"><div class="mem-box cyan" style="width:100%;">A subobject (shared) — x = 10  ✅</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box purple" style="width:100%;">B members</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box purple" style="width:100%;">C members</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box green" style="width:100%;">D's own members</div></div>
+          <div style="height:6px;"></div>
+          <div class="mem-row"><div class="mem-box amber" style="width:100%;">vptr (virtual base pointer)</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:0.78rem;color:var(--green);">One shared A subobject → <code>x</code> is unambiguous!</div>
+      </div>
+    </div>
+
+    <!-- Code: Problem -->
+    <div class="sub-title">❌ Problem Code — Without virtual</div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">diamond_problem.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">A</span> {
+<span class="kw">public</span>:
+    <span class="tp">int</span> x = <span class="nm">10</span>;
+    <span class="kw">void</span> <span class="fn">show</span>() { cout &lt;&lt; <span class="str">"Class A, x = "</span> &lt;&lt; x &lt;&lt; endl; }
+};
+
+<span class="kw">class</span> <span class="cls">B</span> : <span class="kw">public</span> <span class="cls">A</span> {};   <span class="cm">// B gets its own copy of A</span>
+<span class="kw">class</span> <span class="cls">C</span> : <span class="kw">public</span> <span class="cls">A</span> {};   <span class="cm">// C gets its own copy of A</span>
+
+<span class="kw">class</span> <span class="cls">D</span> : <span class="kw">public</span> <span class="cls">B</span>, <span class="kw">public</span> <span class="cls">C</span> {};  <span class="cm">// D now has TWO copies of A!</span>
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">D</span> obj;
+    obj.<span class="fn">show</span>();      <span class="cm">// ❌ COMPILE ERROR: ambiguous — B::A::show() or C::A::show()?</span>
+    obj.x = <span class="nm">5</span>;      <span class="cm">// ❌ COMPILE ERROR: which x? B's copy or C's copy?</span>
+
+    <span class="cm">// Workaround with scope resolution (ugly, not recommended):</span>
+    obj.<span class="cls">B</span>::<span class="fn">show</span>();  <span class="cm">// forces B's path — compiles but is verbose</span>
+    obj.<span class="cls">C</span>::<span class="fn">show</span>();  <span class="cm">// forces C's path</span>
+}</pre>
+    </div>
+
+    <!-- Code: Solution -->
+    <div class="sub-title">✅ Solution Code — Virtual Inheritance</div>
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">diamond_solution.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">A</span> {
+<span class="kw">public</span>:
+    <span class="tp">int</span> x = <span class="nm">10</span>;
+    <span class="kw">void</span> <span class="fn">show</span>() { cout &lt;&lt; <span class="str">"Class A, x = "</span> &lt;&lt; x &lt;&lt; endl; }
+};
+
+<span class="cm">// virtual keyword → B and C share ONE instance of A instead of getting their own</span>
+<span class="kw">class</span> <span class="cls">B</span> : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">A</span> {};
+<span class="kw">class</span> <span class="cls">C</span> : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">A</span> {};
+
+<span class="kw">class</span> <span class="cls">D</span> : <span class="kw">public</span> <span class="cls">B</span>, <span class="kw">public</span> <span class="cls">C</span> {};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">D</span> obj;
+    obj.<span class="fn">show</span>();          <span class="cm">// ✅ "Class A, x = 10" — unambiguous</span>
+    obj.x = <span class="nm">99</span>;          <span class="cm">// ✅ only ONE x exists — no conflict</span>
+    cout &lt;&lt; obj.x;         <span class="cm">// 99</span>
+
+    <span class="cm">// D's constructor is responsible for constructing the virtual base A:</span>
+    <span class="cm">// Constructor order: A → B → C → D   (A is always first, built once)</span>
+}</pre>
+    </div>
+
+    <!-- Constructor Call Order -->
+    <div class="sub-title">🔢 Constructor Call Order with Virtual Inheritance</div>
+    <div class="callout callout-warn" style="margin-bottom:16px;">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Important Rule</strong>
+        With virtual inheritance, the <strong style="color:#fff">most-derived class (D)</strong> is responsible for constructing the virtual base class <strong style="color:#fff">A</strong> directly — not B or C. This prevents A from being constructed multiple times.
+      </div>
+    </div>
+    <ul class="step-list">
+      <li><span class="step-num cyan">1</span><div><strong style="color:#fff">A's constructor</strong> is called first (the shared virtual base) — regardless of what B and C say.</div></li>
+      <li><span class="step-num">2</span><div><strong style="color:#fff">B's constructor</strong> runs next — B's call to A's constructor is <em>silently ignored</em> since A is already built.</div></li>
+      <li><span class="step-num">3</span><div><strong style="color:#fff">C's constructor</strong> runs — again, its call to A is skipped.</div></li>
+      <li><span class="step-num green">4</span><div><strong style="color:#fff">D's constructor</strong> runs last. Destructor order is exactly reversed: D → C → B → A.</div></li>
+    </ul>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">constructor_order.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">A</span> { <span class="kw">public</span>: <span class="cls">A</span>() { cout &lt;&lt; <span class="str">"A constructor\n"</span>; } };
+<span class="kw">class</span> <span class="cls">B</span> : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">A</span> { <span class="kw">public</span>: <span class="cls">B</span>() { cout &lt;&lt; <span class="str">"B constructor\n"</span>; } };
+<span class="kw">class</span> <span class="cls">C</span> : <span class="kw">virtual</span> <span class="kw">public</span> <span class="cls">A</span> { <span class="kw">public</span>: <span class="cls">C</span>() { cout &lt;&lt; <span class="str">"C constructor\n"</span>; } };
+<span class="kw">class</span> <span class="cls">D</span> : <span class="kw">public</span> <span class="cls">B</span>, <span class="kw">public</span> <span class="cls">C</span>  { <span class="kw">public</span>: <span class="cls">D</span>() { cout &lt;&lt; <span class="str">"D constructor\n"</span>; } };
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">D</span> obj;
+    <span class="cm">// Output:</span>
+    <span class="cm">// A constructor   ← virtual base, built FIRST and ONCE by D</span>
+    <span class="cm">// B constructor</span>
+    <span class="cm">// C constructor</span>
+    <span class="cm">// D constructor</span>
+}</pre>
+    </div>
+
+    <!-- Key facts table -->
+    <div class="sub-title">📊 Diamond Problem — Complete Reference Table</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Aspect</th><th>Without virtual</th><th>With virtual</th></tr></thead>
+        <tbody>
+          <tr><td>Copies of A in D</td><td style="color:var(--red)">2 (one via B, one via C)</td><td style="color:var(--green)">1 (shared)</td></tr>
+          <tr><td>Ambiguity when calling A members</td><td style="color:var(--red)">❌ Compile error</td><td style="color:var(--green)">✅ None</td></tr>
+          <tr><td>Memory used</td><td style="color:var(--accent3)">More (duplicate A subobject)</td><td style="color:var(--green)">Less (single A subobject)</td></tr>
+          <tr><td>Who builds A?</td><td>#94a3b8">B and C each do</td><td style="color:var(--green)">D builds A directly (once)</td></tr>
+          <tr><td>Constructor order</td><td style="color:#94a3b8">A, B, A again, C, D</td><td style="color:var(--green)">A once, B, C, D</td></tr>
+          <tr><td>Scope resolution needed?</td><td style="color:var(--accent3)">Yes (B::show, C::show)</td><td style="color:var(--green)">No</td></tr>
+          <tr><td>Virtual base pointer (vptr) added?</td><td style="color:#94a3b8">No</td><td style="color:var(--accent3)">Yes (small overhead)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Exam Q&A grid -->
+    <div class="sub-title">🎯 Exam Q&amp;A — Diamond Problem</div>
+    <div class="exam-grid">
+      <div class="exam-card red">
+        <div class="exam-q">Q1 — Definition</div>
+        <div class="exam-q-text">"What is the Diamond Problem in C++?"</div>
+        <div class="exam-a">When class D inherits from B and C, and both B and C inherit from A, D gets <strong style="color:#fff">two copies</strong> of A's members. This creates <strong style="color:var(--red)">ambiguity</strong> — the compiler cannot determine which copy to use.</div>
+      </div>
+      <div class="exam-card green">
+        <div class="exam-q">Q2 — Solution</div>
+        <div class="exam-q-text">"How do you solve the Diamond Problem?"</div>
+        <div class="exam-a">Use <code style="color:var(--accent)">virtual</code> inheritance when B and C inherit from A: <code style="color:#a78bfa">class B : virtual public A</code>. This ensures only <strong style="color:var(--green)">one shared copy</strong> of A exists throughout the hierarchy.</div>
+      </div>
+      <div class="exam-card cyan">
+        <div class="exam-q">Q3 — Constructor Order</div>
+        <div class="exam-q-text">"What is the constructor call order with virtual inheritance?"</div>
+        <div class="exam-a">With virtual inheritance, the <strong style="color:#fff">most-derived class (D)</strong> constructs the virtual base A first — directly. Order: <strong style="color:var(--accent)">A → B → C → D</strong>. Destructors run in reverse: D → C → B → A.</div>
+      </div>
+      <div class="exam-card amber">
+        <div class="exam-q">Q4 — Without virtual</div>
+        <div class="exam-q-text">"What happens if you don't use virtual?"</div>
+        <div class="exam-a">D will contain <strong style="color:var(--red)">two separate subobjects</strong> of A. Any attempt to access A's members directly through D results in a <strong style="color:var(--red)">compile-time ambiguity error</strong>. You must use scope resolution (B:: or C::) which is verbose and error-prone.</div>
+      </div>
+      <div class="exam-card purple">
+        <div class="exam-q">Q5 — Real World</div>
+        <div class="exam-q-text">"Give a real-world analogy of the Diamond Problem."</div>
+        <div class="exam-a">A <strong style="color:#fff">FlyingFish</strong> inherits from <strong style="color:#fff">Bird</strong> and <strong style="color:#fff">Fish</strong>, both of which inherit from <strong style="color:#fff">Animal</strong>. Without virtual, FlyingFish has two copies of Animal — which eat() do you call? Virtual inheritance ensures there is only one Animal base shared by Bird and Fish.</div>
+      </div>
+      <div class="exam-card cyan">
+        <div class="exam-q">Q6 — vptr</div>
+        <div class="exam-q-text">"What overhead does virtual inheritance add?"</div>
+        <div class="exam-a">Virtual inheritance adds a <strong style="color:var(--accent)">vptr (virtual base pointer)</strong> in intermediate classes (B, C) that points to the shared A subobject. This adds a small memory and indirection overhead, but the benefit — eliminating ambiguity — far outweighs it.</div>
+      </div>
+    </div>
+
+    <!-- Quick Summary -->
+    <div class="quick-summary">
+      <h4>⚡ Quick Revision — Diamond Problem</h4>
+      <ul>
+        <li>Diamond = A (base) → B, C (middle) → D (bottom) inheritance</li>
+        <li>Without <code style="color:var(--accent)">virtual</code>: D holds 2 copies of A → compile-time ambiguity error</li>
+        <li>Fix: add <code style="color:var(--accent)">virtual</code> in B and C when they inherit from A</li>
+        <li>With <code style="color:var(--accent)">virtual</code>: D holds 1 shared copy of A → no ambiguity</li>
+        <li>Constructor order (virtual): A → B → C → D (D builds A directly, once)</li>
+        <li>Workaround without virtual: scope resolution <code style="color:var(--accent3)">obj.B::show()</code> — but messy</li>
+        <li>Virtual inheritance adds a <strong style="color:#fff">vptr</strong> for indirection — tiny overhead, worth it</li>
+      </ul>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 7. POLYMORPHISM ══ -->
+  <section class="section" id="polymorphism">
+    <div class="section-header">
+      <div class="section-icon icon-cyan">🎭</div>
+      <div class="section-title-block">
+        <h2>Polymorphism</h2>
+        <p>"Many forms" — same function name behaves differently in different contexts.</p>
+      </div>
+    </div>
+
+    <div class="poly-grid">
+      <div class="card" style="border-color:rgba(0,229,255,0.2);">
+        <h3 style="color:var(--accent)">Compile-Time Polymorphism</h3>
+        <p>Also called <strong style="color:#fff">Static</strong> or <strong style="color:#fff">Early Binding</strong>. Resolved by the compiler before the program runs.</p>
+        <div class="pills" style="margin-top:12px;">
+          <span class="pill pill-cyan">Function Overloading</span>
+          <span class="pill pill-cyan">Operator Overloading</span>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(124,58,237,0.3);">
+        <h3 style="color:#a78bfa">Runtime Polymorphism</h3>
+        <p>Also called <strong style="color:#fff">Dynamic</strong> or <strong style="color:#fff">Late Binding</strong>. Resolved at runtime through <strong style="color:#fff">virtual functions</strong> and base class pointers.</p>
+        <div class="pills" style="margin-top:12px;">
+          <span class="pill pill-purple">Function Overriding</span>
+          <span class="pill pill-purple">Virtual Functions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-summary">
+      <h4>⚡ Quick Revision — Polymorphism</h4>
+      <ul>
+        <li><strong style="color:#fff">Compile-time (Static):</strong> Function overloading, Operator overloading — resolved by compiler</li>
+        <li><strong style="color:#fff">Runtime (Dynamic):</strong> Function overriding via virtual functions — resolved at runtime</li>
+        <li>Runtime polymorphism requires a <strong style="color:var(--accent)">base class pointer/reference</strong> pointing to a derived object</li>
+        <li>Without <code style="color:var(--accent)">virtual</code> → static binding (always calls base version)</li>
+        <li>With <code style="color:var(--accent)">virtual</code> → dynamic binding (calls correct derived version at runtime)</li>
+      </ul>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 8. FUNCTION OVERLOADING ══ -->
+  <section class="section" id="overloading">
+    <div class="section-header">
+      <div class="section-icon icon-amber">🔀</div>
+      <div class="section-title-block">
+        <h2>Function Overloading</h2>
+        <p>Compile-time polymorphism — same name, different parameter signatures.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">📝</span>
+      <div class="callout-content">
+        <strong>Rules for Overloading</strong>
+        Functions must differ in: number of parameters, types of parameters, or order of parameters. Return type alone is NOT sufficient to overload.
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">function_overloading.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Calculator</span> {
+<span class="kw">public</span>:
+    <span class="cm">// Different number of params</span>
+    <span class="tp">int</span> <span class="fn">add</span>(<span class="tp">int</span> a, <span class="tp">int</span> b)          { <span class="kw">return</span> a + b; }
+    <span class="tp">int</span> <span class="fn">add</span>(<span class="tp">int</span> a, <span class="tp">int</span> b, <span class="tp">int</span> c)   { <span class="kw">return</span> a + b + c; }
+
+    <span class="cm">// Different param types</span>
+    <span class="tp">double</span> <span class="fn">add</span>(<span class="tp">double</span> a, <span class="tp">double</span> b) { <span class="kw">return</span> a + b; }
+
+    <span class="cm">// Different order</span>
+    <span class="kw">void</span> <span class="fn">show</span>(<span class="tp">int</span> i, <span class="tp">double</span> d)     { cout &lt;&lt; i &lt;&lt; <span class="str">" "</span> &lt;&lt; d; }
+    <span class="kw">void</span> <span class="fn">show</span>(<span class="tp">double</span> d, <span class="tp">int</span> i)     { cout &lt;&lt; d &lt;&lt; <span class="str">" "</span> &lt;&lt; i; }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Calculator</span> c;
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">3</span>, <span class="nm">4</span>);          <span class="cm">// calls int version → 7</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>);       <span class="cm">// 3-param version → 12</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">1.5</span>, <span class="nm">2.5</span>);      <span class="cm">// double version → 4.0</span>
+}</pre>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 9. VIRTUAL FUNCTION / OVERRIDING ══ -->
+  <section class="section" id="overriding">
+    <div class="section-header">
+      <div class="section-icon icon-purple">⚡</div>
+      <div class="section-title-block">
+        <h2>Function Overriding &amp; Virtual Functions</h2>
+        <p>Runtime polymorphism — redefine base class function in derived class.</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Overloading</th><th>Overriding</th></tr></thead>
+        <tbody>
+          <tr><td>Binding</td><td>Compile-time</td><td>Runtime</td></tr>
+          <tr><td>Inheritance needed?</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Signature</td><td>Must differ</td><td>Must be same</td></tr>
+          <tr><td>Keyword</td><td>—</td><td><code style="color:var(--accent)">virtual</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Without <code>virtual</code> → Static Binding</strong>
+        Base class pointer always calls base version, even if pointing to derived object. Use <code style="color:var(--accent)">virtual</code> keyword in base to enable dynamic dispatch.
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">virtual_function.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Shape</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual</span> <span class="kw">void</span> <span class="fn">draw</span>() {            <span class="cm">// virtual → runtime dispatch</span>
+        cout &lt;&lt; <span class="str">"Drawing Shape\n"</span>;
+    }
+    <span class="kw">virtual</span> ~<span class="cls">Shape</span>() {}             <span class="cm">// always make destructor virtual!</span>
+};
+
+<span class="kw">class</span> <span class="cls">Circle</span> : <span class="kw">public</span> <span class="cls">Shape</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">draw</span>() <span class="kw">override</span> {           <span class="cm">// override keyword (C++11)</span>
+        cout &lt;&lt; <span class="str">"Drawing Circle ○\n"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="cls">Rectangle</span> : <span class="kw">public</span> <span class="cls">Shape</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">draw</span>() <span class="kw">override</span> {
+        cout &lt;&lt; <span class="str">"Drawing Rectangle □\n"</span>;
+    }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Shape</span>* shapes[] = { <span class="kw">new</span> <span class="cls">Circle</span>(), <span class="kw">new</span> <span class="cls">Rectangle</span>() };
+
+    <span class="kw">for</span> (<span class="kw">auto</span>* s : shapes)
+        s-><span class="fn">draw</span>();                    <span class="cm">// resolved at RUNTIME</span>
+    <span class="cm">// Output:</span>
+    <span class="cm">// Drawing Circle ○</span>
+    <span class="cm">// Drawing Rectangle □</span>
+}
+
+<span class="cm">// ── Pure Virtual (Abstract Class) ─────────────────────────</span>
+<span class="kw">class</span> <span class="cls">AbstractShape</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual</span> <span class="kw">double</span> <span class="fn">area</span>() = <span class="nm">0</span>;     <span class="cm">// pure virtual — MUST override</span>
+};
+<span class="cm">// AbstractShape s;  ← ERROR — cannot instantiate abstract class</span></pre>
+    </div>
+
+    <div class="quick-summary">
+      <h4>⚡ Quick Revision — Virtual Functions &amp; Overriding</h4>
+      <ul>
+        <li><strong style="color:#fff">Overriding:</strong> same signature in derived class — must use <code style="color:var(--accent)">virtual</code> in base</li>
+        <li>Use <code style="color:var(--accent)">override</code> keyword in derived (C++11) — compiler checks signature match</li>
+        <li>Without <code style="color:var(--accent)">virtual</code>: base pointer always calls base version (static binding)</li>
+        <li>With <code style="color:var(--accent)">virtual</code>: correct derived version is called at runtime (dynamic dispatch via vtable)</li>
+        <li>Pure virtual: <code style="color:var(--accent)">virtual void fn() = 0;</code> — makes class abstract, cannot instantiate</li>
+        <li><strong style="color:var(--red)">Always</strong> make destructor <code style="color:var(--accent)">virtual</code> in base class — prevents memory leaks with polymorphism</li>
+      </ul>
+    </div>
+  </section>
+  <div class="divider" style="margin:0 60px;"></div>
+
+  <!-- ══ 10. OPERATOR OVERLOADING ══ -->
+  <section class="section" id="operator">
+    <div class="section-header">
+      <div class="section-icon icon-green">🛠️</div>
+      <div class="section-title-block">
+        <h2>Operator Overloading &amp; Friend Functions</h2>
+        <p>Give custom meaning to operators for user-defined types.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-content">
+        <strong>Syntax:</strong> <code style="color:var(--accent)">returnType operator@(params)</code><br/>
+        where <code>@</code> is any overloadable operator like <code>+</code>, <code>-</code>, <code>==</code>, <code>&lt;&lt;</code>, etc.
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">👥</span>
+      <div class="callout-content">
+        <strong>Friend Function</strong>
+        A <code style="color:var(--accent)">friend</code> function is not a member of a class but can access its private and protected members. Essential for overloading stream operators (<code>&lt;&lt;</code>, <code>&gt;&gt;</code>) and binary operators needing LHS access.
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header">
+        <div class="code-dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+        <span class="code-label">operator_overloading.cpp</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      </div>
+      <pre><span class="kw">class</span> <span class="cls">Complex</span> {
+<span class="kw">private</span>:
+    <span class="tp">double</span> real, imag;
+<span class="kw">public</span>:
+    <span class="cls">Complex</span>(<span class="tp">double</span> r = <span class="nm">0</span>, <span class="tp">double</span> i = <span class="nm">0</span>) : real(r), imag(i) {}
+
+    <span class="cm">// ── Member function overloading (+) ───────────────────</span>
+    <span class="cls">Complex</span> <span class="kw">operator</span>+(<span class="kw">const</span> <span class="cls">Complex</span><span class="op">&amp;</span> other) <span class="kw">const</span> {
+        <span class="kw">return</span> <span class="cls">Complex</span>(real + other.real, imag + other.imag);
+    }
+
+    <span class="cm">// ── Member function overloading (==) ──────────────────</span>
+    <span class="tp">bool</span> <span class="kw">operator</span>==(<span class="kw">const</span> <span class="cls">Complex</span><span class="op">&amp;</span> o) <span class="kw">const</span> {
+        <span class="kw">return</span> (real == o.real) &amp;&amp; (imag == o.imag);
+    }
+
+    <span class="cm">// ── Unary operator overloading (-) ────────────────────</span>
+    <span class="cls">Complex</span> <span class="kw">operator</span>-() <span class="kw">const</span> {
+        <span class="kw">return</span> <span class="cls">Complex</span>(-real, -imag);
+    }
+
+    <span class="cm">// ── Friend function to overload &lt;&lt; ────────────────────</span>
+    <span class="kw">friend</span> ostream<span class="op">&amp;</span> <span class="kw">operator</span>&lt;&lt;(ostream<span class="op">&amp;</span> out, <span class="kw">const</span> <span class="cls">Complex</span><span class="op">&amp;</span> c) {
+        out &lt;&lt; c.real;                 <span class="cm">// accesses private members!</span>
+        <span class="kw">if</span> (c.imag >= <span class="nm">0</span>) out &lt;&lt; <span class="str">"+"</span>;
+        out &lt;&lt; c.imag &lt;&lt; <span class="str">"i"</span>;
+        <span class="kw">return</span> out;                    <span class="cm">// allows chaining cout &lt;&lt; a &lt;&lt; b</span>
+    }
+
+    <span class="cm">// ── Friend for binary ops where LHS isn't the class ───</span>
+    <span class="kw">friend</span> <span class="cls">Complex</span> <span class="kw">operator</span>*(<span class="tp">double</span> scalar, <span class="kw">const</span> <span class="cls">Complex</span><span class="op">&amp;</span> c) {
+        <span class="kw">return</span> <span class="cls">Complex</span>(scalar * c.real, scalar * c.imag);
+    }
+};
+
+<span class="tp">int</span> <span class="fn">main</span>() {
+    <span class="cls">Complex</span> a(<span class="nm">3</span>, <span class="nm">4</span>), b(<span class="nm">1</span>, <span class="nm">2</span>);
+    <span class="cls">Complex</span> c = a + b;
+    cout &lt;&lt; c;                        <span class="cm">// 4+6i  (uses friend &lt;&lt;)</span>
+
+    <span class="cls">Complex</span> d = <span class="nm">2.0</span> * a;              <span class="cm">// uses friend * (double on LHS)</span>
+    cout &lt;&lt; d;                        <span class="cm">// 6+8i</span>
+
+    cout &lt;&lt; (a == b ? <span class="str">"Equal"</span> : <span class="str">"Not Equal"</span>); <span class="cm">// Not Equal</span>
+}</pre>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Operators</th><th>Can Overload?</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code style="color:var(--green)">+ - * / % ^ &amp; |</code></td><td>✅ Yes</td><td>Arithmetic &amp; bitwise</td></tr>
+          <tr><td><code style="color:var(--green)">&lt;&lt; &gt;&gt; == != &lt; &gt;</code></td><td>✅ Yes</td><td>Stream &amp; comparison</td></tr>
+          <tr><td><code style="color:var(--green)">++ -- [] () = -></code></td><td>✅ Yes</td><td>Common utilities</td></tr>
+          <tr><td><code style="color:var(--red)">::  .*  .  ?:</code></td><td>❌ No</td><td>Cannot overload these</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-content">
+        <strong>Best Practices</strong>
+        Don't change the fundamental meaning of operators (e.g., don't make <code>+</code> behave like subtraction). Always return the correct type to allow chaining. Make the destructor <code style="color:var(--accent)">virtual</code> in base classes.
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BAR -->
+  <section style="padding:32px 60px 0;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="font-family:var(--code-font);font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-right:4px;">✦ Created by <strong style="color:var(--text)">Shahamat Shakeel</strong></span>
+      <div style="flex:1;height:1px;background:var(--border);min-width:20px;"></div>
+      <a href="https://github.com/shahamatshakeel-ux" target="_blank"
+        style="display:flex;align-items:center;gap:8px;padding:9px 20px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;color:var(--text);text-decoration:none;font-size:0.8rem;font-family:var(--code-font);transition:all .2s;"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/shahamat-shakil-55a8a427a" target="_blank"
+        style="display:flex;align-items:center;gap:8px;padding:9px 20px;background:rgba(10,102,194,0.1);border:1px solid rgba(10,102,194,0.3);border-radius:10px;color:#60a5fa;text-decoration:none;font-size:0.8rem;font-family:var(--code-font);transition:all .2s;"
+        onmouseover="this.style.borderColor='#60a5fa'" onmouseout="this.style.borderColor='rgba(10,102,194,0.3)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section style="padding:40px 60px;">
+    <div style="background:linear-gradient(135deg, rgba(0,229,255,0.06), rgba(124,58,237,0.06));border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">🎓</div>
+      <h2 style="font-family:var(--heading-font);font-size:1.6rem;color:#fff;margin-bottom:10px;">You've Covered All OOP Concepts!</h2>
+      <p style="color:var(--muted);max-width:520px;margin:0 auto;font-size:0.88rem;">Review each section, practise the code examples, and build small projects to solidify your understanding. OOP mastery comes from writing code, not just reading it.</p>
+      <div class="pills" style="justify-content:center;margin-top:20px;">
+        <span class="pill pill-cyan">Class &amp; Object</span>
+        <span class="pill pill-purple">Constructors</span>
+        <span class="pill pill-cyan">Shallow/Deep Copy</span>
+        <span class="pill pill-red">Destructor</span>
+        <span class="pill pill-amber">Encapsulation</span>
+        <span class="pill pill-green">Association</span>
+        <span class="pill pill-pink">Inheritance</span>
+        <span class="pill pill-red">Diamond Problem</span>
+        <span class="pill pill-cyan">Polymorphism</span>
+        <span class="pill pill-purple">Overloading</span>
+        <span class="pill pill-green">Virtual Fn</span>
+        <span class="pill pill-amber">Operator OL</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<button id="mob-btn" onclick="toggleSidebar()">☰</button>
+
+<script>
+  // ── Active nav on scroll ────────────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const main = document.getElementById('main');
+
+  // ── Active nav + progress bar on scroll ─────────────────────
+  main.addEventListener('scroll', () => {
+    // progress bar
+    const scrolled = main.scrollTop;
+    const total = main.scrollHeight - main.clientHeight;
+    document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+    // active nav highlight
+    let current = '';
+    sections.forEach(s => {
+      if (main.scrollTop + 120 >= s.offsetTop) current = s.id;
+    });
+    navItems.forEach(n => {
+      n.classList.toggle('active', n.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── Smooth scroll on nav click ──────────────────────────────
+  navItems.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(item.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ── Copy code ───────────────────────────────────────────────
+  function copyCode(btn) {
+    const code = btn.closest('.code-wrap').querySelector('pre').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'Copied!';
+      btn.style.color = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 2000);
+    });
+  }
+
+  // ── Search filter ───────────────────────────────────────────
+  function filterNav(val) {
+    val = val.toLowerCase();
+    navItems.forEach(n => {
+      n.style.display = n.textContent.toLowerCase().includes(val) ? '' : 'none';
+    });
+  }
+
+  // ── Mobile sidebar ──────────────────────────────────────────
+  let sidebarOpen = false;
+  function toggleSidebar() {
+    const sb = document.getElementById('sidebar');
+    sidebarOpen = !sidebarOpen;
+    sb.style.cssText = sidebarOpen
+      ? 'display:flex;position:fixed;top:0;left:0;height:100vh;z-index:999;'
+      : '';
+  }
+
+  // ── Chip navigation ─────────────────────────────────────────
+  document.querySelectorAll('.chip').forEach(c => {
+    c.addEventListener('click', () => {
+      const href = c.getAttribute('onclick').match(/'#(.+?)'/)?.[1];
+      if (href) {
+        const el = document.getElementById(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ── Entrance animations ─────────────────────────────────────
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.5s ease both';
+        io.unobserve(e.target);
+      }
+    });
+  }, { root: main, threshold: 0.05 });
+
+  document.querySelectorAll('.card, .code-wrap, .callout, .tbl-wrap').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
